@@ -5,12 +5,10 @@ import 'package:portfolio/models/home_section.dart';
 
 class HomeSections extends StatefulWidget {
   final List<String> sections;
-  final ValueNotifier<HomeSection?> sectionNotifier;
 
   const HomeSections({
     super.key,
     required this.sections,
-    required this.sectionNotifier,
   });
 
   @override
@@ -27,19 +25,20 @@ class _HomeSectionsState extends State<HomeSections> {
   }
 
   int get _colorCodeIndex {
-    int index = widget.sections.indexWhere((nameSection) => nameSection == widget.sectionNotifier.value?.name);
-    return index > -1 ? index : 0;
+    //int index = widget.sections.indexWhere((nameSection) => nameSection == widget.sectionNotifier.value?.section);
+    //return index > -1 ? index : 0;
+    return 0;
   }
 
   @override
   void initState() {
     super.initState();
-    widget.sectionNotifier.addListener(() {
-      final fromScroll = widget.sectionNotifier.value?.source == SelectionSource.fromScroll;
-      if (_scrollController.hasClients && !fromScroll) {
-        _scrollToSection();
-      }
-    });
+    // widget.sectionNotifier.addListener(() {
+    //   final fromScroll = widget.sectionNotifier.value?.source == SelectionSource.fromScroll;
+    //   if (_scrollController.hasClients && !fromScroll) {
+    //     _scrollToSection();
+    //   }
+    // });
   }
 
   @override
@@ -51,7 +50,7 @@ class _HomeSectionsState extends State<HomeSections> {
         return NotificationListener<ScrollNotification>(
           onNotification: (notification) {
             if (notification is UserScrollNotification) {
-              _onUserScroll(notification.metrics.pixels);
+              //_onUserScroll(notification.metrics.pixels);
             }
             return true;
           },
@@ -63,7 +62,7 @@ class _HomeSectionsState extends State<HomeSections> {
               final section = widget.sections[index];
               return Container(
                 height: itemHeight,
-                child: _section(section, context),
+                //child: _section(section, context),
               );
             },
           ),
@@ -72,21 +71,22 @@ class _HomeSectionsState extends State<HomeSections> {
     );
   }
 
-  void _onUserScroll(double offset) {
-    final itemHeight = _calculateItemHeight(availableHeight: _scrollController.position.viewportDimension);
-    final trailingIndex = (offset / itemHeight).floor();
-    widget.sectionNotifier.value = HomeSection(
-      name: widget.sections[trailingIndex],
-      source: SelectionSource.fromScroll,
-    );
-  }
+  // void _onUserScroll(double offset) {
+  //   final itemHeight = _calculateItemHeight(availableHeight: _scrollController.position.viewportDimension);
+  //   final trailingIndex = (offset / itemHeight).floor();
+  //   widget.sectionNotifier.value = RouterModel(
+  //     mode: 'home',
+  //     section: widget.sections[trailingIndex],
+  //     source: SelectionSource.fromScroll,
+  //   );
+  // }
 
-  Widget _section(String section, BuildContext context) {
-    return SectionsListView(
-      sectionName: section,
-      sectionNotifier: widget.sectionNotifier,
-    );
-  }
+  // Widget _section(String section, BuildContext context) {
+  //   return SectionsListView(
+  //     sectionName: section,
+  //     sectionNotifier: widget.sectionNotifier,
+  //   );
+  // }
 
   void _scrollToSection() {
     final itemHeight = _calculateItemHeight(availableHeight: context.size!.height);
@@ -95,27 +95,6 @@ class _HomeSectionsState extends State<HomeSections> {
       offset,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
-    );
-  }
-}
-
-class SectionsListView extends StatelessWidget {
-  final ValueNotifier<HomeSection?> sectionNotifier;
-  final String sectionName;
-
-  const SectionsListView({
-    super.key,
-    required this.sectionName,
-    required this.sectionNotifier,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Text(
-        'Content in section',
-      ),
     );
   }
 }
