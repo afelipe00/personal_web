@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:portfolio/config/constants/routes.dart';
-import 'package:portfolio/config/routes/router_delegate.dart';
-import 'package:portfolio/config/routes/router_parse.dart';
 import 'package:portfolio/interface/screens/screens.dart';
 
 void main() {
@@ -34,7 +32,7 @@ class _MyAppState extends State<MyApp> {
           if (currentMode == AppRoutes.initial)
             MaterialPage(
               key: const ValueKey(AppRoutes.initial),
-              child: LayoutScreen(
+              child: WelcomeScreen(
                 onModeTap: _handlePortfolioMode,
               ),
             ),

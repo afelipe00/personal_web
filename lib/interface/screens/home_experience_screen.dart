@@ -11,7 +11,15 @@ class HomeExperienceScreen extends StatefulWidget {
 
 class _HomeExperienceScreenState extends State<HomeExperienceScreen> {
   int _counter = 0;
-  List<String> _words = ['Word 1', 'Word 2', 'Word 3']; // List of words
+  List<String> _words = [
+    'creative',
+    'expert',
+    'python',
+    'flutter',
+    'web',
+    'mobile',
+    'AI',
+  ];
   Timer? _timer;
 
   void _startTimer() {
@@ -45,7 +53,7 @@ class _HomeExperienceScreenState extends State<HomeExperienceScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             AnimatedSwitcher(
-              duration: Duration(milliseconds: 500),
+              duration: Duration(seconds: 1),
               child: Text(
                 '$_counter',
                 key: ValueKey<int>(_counter),

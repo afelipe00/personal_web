@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/interface/screens/home_simple_screen.dart';
-import 'package:portfolio/interface/screens/layout_screen.dart';
+import 'package:portfolio/interface/screens/welcome_screen.dart';
 import 'package:portfolio/models/home_section.dart';
 
 class HomePage<T> extends Page<T> {
