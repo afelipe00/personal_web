@@ -1,5 +1,5 @@
 class AppRoutes {
-  static const String initial = '/';
+  static const String root = '/';
   static const String home = '/home';
   static const String aboutMe = '/about-me';
   static const String services = '/services';
@@ -11,6 +11,8 @@ class AppRoutes {
 
   static const String simpleMode = '/simple';
   static const String experienceMode = '/experience';
+
+  static const String initial = root;
 
   static const List<String> routes = [
     home,

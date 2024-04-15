@@ -1,16 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/config/constants/routes.dart';
 import 'package:portfolio/interface/widgets/gradient_text.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  final Function(String) onModeTap;
-
   const WelcomeScreen({
     super.key,
-    required this.onModeTap,
   });
 
   @override
@@ -110,7 +108,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  onPressed: () => widget.onModeTap(AppRoutes.simpleMode),
+                  onPressed: () => context.push(AppRoutes.simpleMode),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF262626).withOpacity(0.7),
                     shape: RoundedRectangleBorder(
@@ -136,7 +134,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 const SizedBox(width: 20.0),
                 OutlinedButton(
-                  onPressed: () => widget.onModeTap(AppRoutes.experienceMode),
+                  onPressed: () => context.push(AppRoutes.experienceMode),
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.green.withOpacity(0.1),
                     shape: RoundedRectangleBorder(
