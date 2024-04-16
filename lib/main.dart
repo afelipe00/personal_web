@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:go_router/go_router.dart';
 import 'package:portfolio/config/constants/routes.dart';
 import 'package:portfolio/config/routes/router.dart';
@@ -28,11 +27,5 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       routerConfig: router,
     );
-  }
-
-  void _handlePortfolioMode(String mode) {
-    setState(() {
-      currentMode = mode;
-    });
   }
 }

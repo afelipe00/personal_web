@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:portfolio/models/home_section.dart';
 
 class HomeSections extends StatefulWidget {
   final List<String> sections;
@@ -59,7 +58,6 @@ class _HomeSectionsState extends State<HomeSections> {
             itemCount: widget.sections.length,
             physics: AlwaysScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
-              final section = widget.sections[index];
               return Container(
                 height: itemHeight,
                 //child: _section(section, context),

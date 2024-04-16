@@ -20,9 +20,9 @@ class FrostedGlassWidget extends StatelessWidget {
         child: Stack(
           children: [
             BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+              filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
               child: Container(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.black.withOpacity(0.3),
               ),
             ),
             Container(
@@ -38,8 +38,8 @@ class FrostedGlassWidget extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.white.withOpacity(0.2),
-                    Colors.white.withOpacity(0.1),
+                    Colors.black.withOpacity(0.3),
+                    Colors.black.withOpacity(0.1),
                   ],
                 ),
               ),
