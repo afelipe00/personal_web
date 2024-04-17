@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:footer/footer.dart';
+import 'package:footer/footer_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/interface/screens/in_work.dart';
 
 import 'package:portfolio/interface/widgets/about/my_info_widget.dart';
 import 'package:portfolio/interface/widgets/about/section_buttons_widget.dart';
 import 'package:portfolio/interface/widgets/about/social_buttons_widget.dart';
+import 'package:portfolio/interface/widgets/footer_widget.dart';
 import 'package:portfolio/interface/widgets/home/simple_about.dart';
 import 'package:portfolio/interface/widgets/home/simple_contact.dart';
 import 'package:portfolio/interface/widgets/home/simple_projects.dart';
@@ -23,7 +26,7 @@ class HomeSimpleScreen extends StatefulWidget {
 }
 
 class _HomeSimpleScreenState extends State<HomeSimpleScreen> with SingleTickerProviderStateMixin {
-  int _selectedSection = 4;
+  int _selectedSection = 0;
   late AnimationController controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -110,55 +113,65 @@ class _HomeSimpleScreenState extends State<HomeSimpleScreen> with SingleTickerPr
           )
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 30.0),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                height: 160.0,
-                child: const Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    MyInfoWidget(),
-                    Positioned(
-                      bottom: 0.0,
-                      left: -10.0,
-                      child: SocialButtons(),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Divider(
-                  color: Colors.grey.withOpacity(0.5),
-                  thickness: 0.5,
-                ),
-              ),
-              SectionsButtons(
-                onSectionSelected: _onSectionSelected,
-              ),
-              FadeTransition(
-                opacity: _fadeAnimation,
-                child: SlideTransition(
-                  position: _slideAnimation,
-                  child: switch (_selectedSection) {
-                    0 => const SimpleAbout(),
-                    1 => const SimpleProjects(),
-                    2 => const SimpleUses(),
-                    3 => const InWorkingScreen(),
-                    4 => const SimpleContact(),
-                    _ => Container(),
-                  },
-                ),
-              ),
-            ],
-          ),
+      body: FooterView(
+        flex: 7,
+        footer: Footer(
+          padding: const EdgeInsets.all(20.0),
+          backgroundColor: const Color.fromARGB(255, 44, 44, 44),
+          child: const FooterWidget(),
         ),
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 30.0),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    height: 160.0,
+                    child: const Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        MyInfoWidget(),
+                        Positioned(
+                          bottom: 0.0,
+                          left: -10.0,
+                          child: SocialButtons(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Divider(
+                      color: Colors.grey.withOpacity(0.5),
+                      thickness: 0.5,
+                    ),
+                  ),
+                  SectionsButtons(
+                    onSectionSelected: _onSectionSelected,
+                  ),
+                  FadeTransition(
+                    opacity: _fadeAnimation,
+                    child: SlideTransition(
+                      position: _slideAnimation,
+                      child: switch (_selectedSection) {
+                        0 => const SimpleAbout(),
+                        1 => const SimpleProjects(),
+                        2 => const SimpleUses(),
+                        3 => const InWorkingScreen(),
+                        4 => const SimpleContact(),
+                        _ => Container(),
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

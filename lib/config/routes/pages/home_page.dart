@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/interface/screens/home_simple_screen.dart';
+import 'package:portfolio/interface/screens/simple/home_simple_screen.dart';
 
 class HomePage<T> extends Page<T> {
   final List<String> sections;

@@ -6,24 +6,21 @@ import 'package:timelines/timelines.dart';
 final experiences = [
   Experience(
     title: 'Konyu - Tech Lead',
-    body: "Lead a development team for the Konyu in charge of creating",
-    checkIn: DateTime(2020),
+    body:
+        "Lead a development team for Konyu in charge of creating the first completely autonomous marketplace in Colombia, through the development of a mobile application, an administrative web portal and computer vision algorithms in an IoT system. ",
+    checkIn: DateTime(2022),
   ),
   Experience(
-    title: 'Konyu - Tech Lead',
-    body: "Lead a development team for the Konyu in charge of creating",
-    checkIn: DateTime(2020),
-    checkOut: DateTime(2021),
+    title: 'Nextonia - Software Developer',
+    body:
+        "Manage services created in the cloud, accounts in digital stores and tools for development; Supervise and develop a web application, a mobile app and IoT platform based on microservices and serverless architecture, design the database models and architecture with high scalability and response speed in mind.",
+    checkIn: DateTime(2021),
+    checkOut: DateTime(2022),
   ),
   Experience(
-    title: 'Konyu - Tech Lead',
-    body: "Lead a development team for the Konyu in charge of creating",
-    checkIn: DateTime(2020),
-    checkOut: DateTime(2021),
-  ),
-  Experience(
-    title: 'Konyu - Tech Lead',
-    body: "Lead a development team for the Konyu in charge of creating",
+    title: 'Nextonia - College Intern',
+    body:
+        "Learn and develop web applications based on microservices and serverless architecture, create API's with python (AZ Functions), Django and flask framework, perform testing, CI and CD.",
     checkIn: DateTime(2020),
     checkOut: DateTime(2021),
   ),
@@ -78,13 +75,13 @@ class ExperienceTimeLine extends StatelessWidget {
     return Timeline.tileBuilder(
       shrinkWrap: true,
       theme: TimelineThemeData(
-        nodePosition: 0.2,
+        nodePosition: 0.04,
         indicatorTheme: const IndicatorThemeData(
           size: 14.0,
         ),
       ),
       builder: TimelineTileBuilder.connected(
-        itemCount: 3,
+        itemCount: experiences.length,
         indicatorBuilder: (context, index) {
           int grayValue = (255 - ((index + 1) / 10 * 255)).round();
           return DotIndicator(
@@ -111,79 +108,82 @@ class ExperienceTimeLine extends StatelessWidget {
             ),
           );
         },
-        oppositeContentsBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              experiences[index].title,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: GoogleFonts.workSans().fontFamily,
-              ),
-            ),
-          );
-        },
         contentsBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              color: Colors.transparent,
-              elevation: 0,
-              child: Container(
-                width: size.width * 0.35,
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.2),
-                    width: 0.5,
-                  ),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Colors.white.withOpacity(0.1),
-                      Colors.white.withOpacity(0.05),
-                    ],
-                  ),
+            padding: const EdgeInsets.all(12.0),
+            child: Container(
+              width: size.width * 0.4,
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.0),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.white.withOpacity(0.03),
+                    Colors.white.withOpacity(0.03),
+                  ],
                 ),
-                child: ListTile(
-                    subtitle: Text(
-                      experiences[index].body,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14.0,
-                        fontFamily: GoogleFonts.openSans().fontFamily,
-                      ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: size.width * 0.4 * 0.75,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          experiences[index].title,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.0,
+                            fontFamily: GoogleFonts.workSans().fontFamily,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 4.0,
+                        ),
+                        Text(
+                          experiences[index].body,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontFamily: GoogleFonts.openSans().fontFamily,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ],
                     ),
-                    trailing: experiences[index].isCurrent
-                        ? Transform.scale(
-                            scale: 0.8,
-                            child: OutlinedButton(
-                              onPressed: () {},
-                              style: OutlinedButton.styleFrom(
-                                backgroundColor: Colors.green.withOpacity(0.1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                side: BorderSide(
-                                  color: Colors.green.withOpacity(0.5),
-                                ),
-                              ),
-                              child: Text(
-                                'present',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: GoogleFonts.workSans().fontFamily,
-                                  fontSize: 16,
-                                  color: Colors.green,
-                                ),
-                              ),
+                  ),
+                  experiences[index].isCurrent
+                      ? Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: Colors.green.withOpacity(0.5),
                             ),
-                          )
-                        : null),
+                          ),
+                          child: Text(
+                            'present',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.workSans().fontFamily,
+                              fontSize: 14,
+                              color: Colors.green,
+                            ),
+                          ),
+                        )
+                      : Text(
+                          '${experiences[index].checkIn.year} - ${experiences[index].checkOut?.year}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.0,
+                            fontFamily: GoogleFonts.openSans().fontFamily,
+                          ),
+                        ),
+                ],
               ),
             ),
           );

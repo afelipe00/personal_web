@@ -21,3 +21,5 @@ const String reactLogo = 'assets/icons/react.svg';
 const String meetLogo = 'assets/icons/meet.svg';
 
 const String notFound = 'assets/images/404.png';
+
+const String rocket = 'assets/images/rocket-48.png';
