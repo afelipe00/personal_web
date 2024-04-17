@@ -147,7 +147,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: SizedBox(
                     width: 90,
                     child: Text(
-                      'Experience',
+                      'Pretty',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: GoogleFonts.workSans().fontFamily,

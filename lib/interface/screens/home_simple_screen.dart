@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/interface/screens/in_work.dart';
 
 import 'package:portfolio/interface/widgets/about/my_info_widget.dart';
 import 'package:portfolio/interface/widgets/about/section_buttons_widget.dart';
@@ -23,7 +24,7 @@ class HomeSimpleScreen extends StatefulWidget {
 }
 
 class _HomeSimpleScreenState extends State<HomeSimpleScreen> with SingleTickerProviderStateMixin {
-  int _selectedSection = 2;
+  int _selectedSection = 4;
   late AnimationController controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -150,7 +151,7 @@ class _HomeSimpleScreenState extends State<HomeSimpleScreen> with SingleTickerPr
                     0 => const SimpleAbout(),
                     1 => const SimpleProjects(),
                     2 => const SimpleUses(),
-                    3 => const SimpleBlog(),
+                    3 => const InWorkingScreen(),
                     4 => const SimpleContact(),
                     _ => Container(),
                   },

@@ -16,11 +16,14 @@ class _SimpleAboutState extends State<SimpleAbout> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Hi! I am an electronic engineer and I had the privilege of being part of a small group of professionals who collaborated in the creation of the first completely autonomous market in Colombia.',
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: GoogleFonts.openSans().fontFamily,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            'Hi! I am an electronic engineer and I had the privilege of being part of a small group of professionals who collaborated in the creation of the first completely autonomous market in Colombia.',
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: GoogleFonts.openSans().fontFamily,
+            ),
           ),
         ),
         const ExperienceWidget(),

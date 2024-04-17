@@ -8,6 +8,11 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final router = GoRouter(
   initialLocation: AppRoutes.initial,
   navigatorKey: _rootNavigatorKey,
+  errorPageBuilder: (context, state) {
+    return const MaterialPage(
+      child: NotFoundScreen(),
+    );
+  },
   routes: [
     GoRoute(
       path: AppRoutes.initial,

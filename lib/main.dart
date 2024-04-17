@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:portfolio/config/constants/routes.dart';
 import 'package:portfolio/config/routes/router.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
-void main() {
+void main() async {
   GoRouter.optionURLReflectsImperativeAPIs = true;
+  tz.initializeTimeZones();
   runApp(const MyApp());
 }
 
