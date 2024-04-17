@@ -8,6 +8,7 @@ final services = [
     title: 'Web Development',
     description:
         'Development with ReactJS and Astro, using TypeScript. Creating dynamic, fast, beautiful interfaces tailored to your needs.',
+    hashTag: " #ReactJS #Astro #TypeScript",
     icon: const Icon(
       Icons.web,
       color: Colors.white,
@@ -17,6 +18,7 @@ final services = [
     title: 'Mobile Development',
     description:
         'Development with Flutter to create high-performance mobile applications. Starting from mockups, interface design, prototypes to production deployments.',
+    hashTag: " #Flutter",
     icon: const Icon(
       Icons.phone_android_rounded,
       color: Colors.white,
@@ -25,6 +27,7 @@ final services = [
   Service(
     title: 'AI Development',
     description: 'Development with Python and Rust to offer you powerful and secure artificial intelligence solutions.',
+    hashTag: ' #Python #Rust',
     icon: Image.asset(
       brain60Filled,
       color: Colors.white,
@@ -135,13 +138,22 @@ class _ServiceWidgetState extends State<ServiceWidget> {
                         const SizedBox(height: 5.0),
                         SizedBox(
                           width: 320.0,
-                          child: Text(
-                            services[index].description,
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14.0,
-                              fontFamily: GoogleFonts.openSans().fontFamily,
-                            ),
+                          child: RichText(
+                            text: TextSpan(
+                                text: services[index].description,
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 14.0,
+                                  fontFamily: GoogleFonts.openSans().fontFamily,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: services[index].hashTag,
+                                    style: const TextStyle(
+                                      color: Colors.green,
+                                    ),
+                                  )
+                                ]),
                           ),
                         )
                       ],
