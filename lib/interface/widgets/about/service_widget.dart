@@ -138,7 +138,7 @@ class _ServiceWidgetState extends State<ServiceWidget> {
                           child: Text(
                             services[index].description,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.grey,
                               fontSize: 14.0,
                               fontFamily: GoogleFonts.openSans().fontFamily,
                             ),
