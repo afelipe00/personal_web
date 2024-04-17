@@ -21,10 +21,11 @@ dependencies:
   google_fonts: ^6.2.1
   timelines: ^0.1.0
   flutter_svg: ^2.0.10+1
-  syncfusion_flutter_calendar: ^25.1.39
   timezone: ^0.9.2
   dropdown_search: ^5.0.6
   flutter_feather_icons: ^2.0.0+1
+  table_calendar: ^3.1.1
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:

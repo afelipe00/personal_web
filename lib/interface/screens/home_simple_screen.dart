@@ -6,7 +6,6 @@ import 'package:portfolio/interface/widgets/about/my_info_widget.dart';
 import 'package:portfolio/interface/widgets/about/section_buttons_widget.dart';
 import 'package:portfolio/interface/widgets/about/social_buttons_widget.dart';
 import 'package:portfolio/interface/widgets/home/simple_about.dart';
-import 'package:portfolio/interface/widgets/home/simple_blogs.dart';
 import 'package:portfolio/interface/widgets/home/simple_contact.dart';
 import 'package:portfolio/interface/widgets/home/simple_projects.dart';
 import 'package:portfolio/interface/widgets/home/simple_uses.dart';
