@@ -18,5 +18,6 @@ const String typescriptLogo = 'assets/icons/ts_logo.svg';
 const String fastAPILogo = 'assets/icons/fastapi.svg';
 const String astroLogo = 'assets/icons/astro.svg';
 const String reactLogo = 'assets/icons/react.svg';
+const String meetLogo = 'assets/icons/react.svg';
 
 const String notFound = 'assets/images/404.png';
