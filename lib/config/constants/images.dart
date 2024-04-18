@@ -23,3 +23,15 @@ const String meetLogo = 'assets/icons/meet.svg';
 const String notFound = 'assets/images/404.png';
 
 const String rocket = 'assets/images/rocket-48.png';
+
+const String projectApp0 = 'assets/images/app-0.png';
+const String projectApp1 = 'assets/images/app-1.png';
+const String projectApp2 = 'assets/images/app-2.png';
+const String projectAgTech0 = 'assets/images/agtech-0.jpeg';
+const String projectAgTech1 = 'assets/images/agtech-1.webp';
+const String projectPortal0 = 'assets/images/portal-0.png';
+const String projectPortal1 = 'assets/images/portal-1.jpeg';
+const String projectPortal2 = 'assets/images/portal-2.png';
+const String projectSm0 = 'assets/images/sm-0.png';
+const String projectSm1 = 'assets/images/sm-1.png';
+const String projectSm2 = 'assets/images/sm-2.png';

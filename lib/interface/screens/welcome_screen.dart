@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/config/constants/routes.dart';
@@ -92,37 +93,37 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Select your mode',
-                style: TextStyle(
-                  fontFamily: GoogleFonts.workSans().fontFamily,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16,
-                  color: Colors.grey,
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Text(
+            //     'Select your mode',
+            //     style: TextStyle(
+            //       fontFamily: GoogleFonts.workSans().fontFamily,
+            //       fontWeight: FontWeight.normal,
+            //       fontSize: 16,
+            //       color: Colors.grey,
+            //     ),
+            //   ),
+            // ),
+            ElevatedButton(
+              onPressed: () => context.push(AppRoutes.simpleMode),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF262626).withOpacity(0.7),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: const BorderSide(
+                    color: Color(0xFF525252),
+                    width: 0.5,
+                  ),
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  onPressed: () => context.push(AppRoutes.simpleMode),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF262626).withOpacity(0.7),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: const BorderSide(
-                        color: Color(0xFF525252),
-                        width: 0.5,
-                      ),
-                    ),
-                  ),
-                  child: SizedBox(
-                    width: 90,
-                    child: Text(
-                      'Simplified',
+              child: SizedBox(
+                width: 150,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'Click to start',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: GoogleFonts.workSans().fontFamily,
@@ -130,35 +131,70 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         color: Colors.white,
                       ),
                     ),
-                  ),
+                    const Icon(
+                      FeatherIcons.arrowRight,
+                      color: Colors.white,
+                      size: 16,
+                    )
+                  ],
                 ),
-                const SizedBox(width: 20.0),
-                OutlinedButton(
-                  onPressed: () => context.push(AppRoutes.experienceMode),
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.green.withOpacity(0.1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    side: BorderSide(
-                      color: Colors.green.withOpacity(0.5),
-                    ),
-                  ),
-                  child: SizedBox(
-                    width: 90,
-                    child: Text(
-                      'Pretty',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: GoogleFonts.workSans().fontFamily,
-                        fontSize: 16,
-                        color: Colors.green,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            )
+              ),
+            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     ElevatedButton(
+            //       onPressed: () => context.push(AppRoutes.simpleMode),
+            //       style: ElevatedButton.styleFrom(
+            //         backgroundColor: const Color(0xFF262626).withOpacity(0.7),
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(8),
+            //           side: const BorderSide(
+            //             color: Color(0xFF525252),
+            //             width: 0.5,
+            //           ),
+            //         ),
+            //       ),
+            //       child: SizedBox(
+            //         width: 90,
+            //         child: Text(
+            //           'Simplified',
+            //           textAlign: TextAlign.center,
+            //           style: TextStyle(
+            //             fontFamily: GoogleFonts.workSans().fontFamily,
+            //             fontSize: 16,
+            //             color: Colors.white,
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     const SizedBox(width: 20.0),
+            //     OutlinedButton(
+            //       onPressed: () => context.push(AppRoutes.experienceMode),
+            //       style: OutlinedButton.styleFrom(
+            //         backgroundColor: Colors.green.withOpacity(0.1),
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(8),
+            //         ),
+            //         side: BorderSide(
+            //           color: Colors.green.withOpacity(0.5),
+            //         ),
+            //       ),
+            //       child: SizedBox(
+            //         width: 90,
+            //         child: Text(
+            //           'Pretty',
+            //           textAlign: TextAlign.center,
+            //           style: TextStyle(
+            //             fontFamily: GoogleFonts.workSans().fontFamily,
+            //             fontSize: 16,
+            //             color: Colors.green,
+            //           ),
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )
           ],
         ),
       ),

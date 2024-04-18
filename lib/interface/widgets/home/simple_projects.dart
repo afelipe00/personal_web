@@ -1,28 +1,46 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/config/constants/images.dart';
 import 'package:portfolio/interface/widgets/frosted_glass.dart';
+import 'package:portfolio/interface/widgets/parallax_card.dart';
 import 'package:portfolio/models/projects.dart';
 
 final projects = [
   Project(
-    name: 'Konyu Smart Market',
-    description: 'A smart market app that allows users to buy and sell goods and services.',
-    image: "https://picsum.photos/600/300.jpg",
+    name: 'Konyu App Mobile',
+    description: '',
+    images: [
+      projectApp0,
+      projectApp1,
+      projectApp2,
+    ],
   ),
   Project(
-    name: '',
+    name: 'Konyu Portal Web',
     description: '',
-    image: 'https://picsum.photos/600/300.jpg',
+    images: [
+      projectPortal0,
+      projectPortal1,
+      projectPortal2,
+    ],
   ),
   Project(
     name: 'Konyu Smart Market',
     description: '',
-    image: 'https://picsum.photos/600/300.jpg',
+    images: [
+      projectSm0,
+      projectSm1,
+      projectSm2,
+    ],
   ),
   Project(
-    name: 'Konyu Smart Market',
+    name: 'AgTech - Agriculture Tech',
     description: '',
-    image: 'https://picsum.photos/600/300.jpg',
+    images: [
+      projectAgTech0,
+      projectAgTech1,
+    ],
   ),
 ];
 
@@ -49,56 +67,85 @@ class _SimpleProjectsState extends State<SimpleProjects> {
         ),
         itemCount: 4,
         itemBuilder: (context, index) {
-          return Card(
-            elevation: 10,
-            color: const Color(0xFF393939),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Stack(
-              children: [
-                Container(
-                  height: size.height,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.network(
-                      projects[index].image,
-                      height: 100,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+          return ParallaxCard(
+            height: size.height / 2,
+            width: size.width / 2.3,
+            child: Card(
+              elevation: 10,
+              color: const Color(0xFF393939),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: Stack(
+                children: [
+                  Container(
+                    height: size.height,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                  ),
-                ),
-                FrostedGlassWidget(
-                  child: Container(
-                    alignment: AlignmentDirectional.bottomStart,
-                    child: ListTile(
-                      title: Text(
-                        projects[index].name,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: GoogleFonts.openSans().fontFamily,
-                          fontSize: 20.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: CarouselSlider.builder(
+                        itemCount: projects[index].images.length,
+                        itemBuilder: (context, i, realIndex) {
+                          if (index == 0) {
+                            return Container(
+                              color: Colors.black.withOpacity(0.72),
+                              child: Image.asset(
+                                projects[index].images[i],
+                                height: 100,
+                                width: double.infinity,
+                                fit: BoxFit.contain,
+                              ),
+                            );
+                          } else {
+                            return Image.asset(
+                              projects[index].images[i],
+                              height: 100,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            );
+                          }
+                        },
+                        options: CarouselOptions(
+                          autoPlay: true,
+                          autoPlayInterval: const Duration(seconds: 8),
+                          autoPlayAnimationDuration: const Duration(seconds: 3),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          viewportFraction: 1.0,
+                          scrollPhysics: const NeverScrollableScrollPhysics(),
                         ),
                       ),
-                      subtitle: Text(
-                        projects[index].description,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: GoogleFonts.openSans().fontFamily,
-                          fontSize: 16.0,
+                    ),
+                  ),
+                  FrostedGlassWidget(
+                    child: Container(
+                      alignment: AlignmentDirectional.bottomStart,
+                      child: ListTile(
+                        title: Text(
+                          projects[index].name,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: GoogleFonts.openSans().fontFamily,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        subtitle: Text(
+                          projects[index].description,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: GoogleFonts.openSans().fontFamily,
+                            fontSize: 16.0,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           );
         },
