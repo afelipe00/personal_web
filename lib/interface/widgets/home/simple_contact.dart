@@ -171,7 +171,7 @@ class _SimpleContactState extends State<SimpleContact> {
         ),
         Container(
           padding: const EdgeInsets.all(8.0),
-          width: size.width * 0.4,
+          width: size.width * 0.35,
           child: TableCalendar(
             firstDay: DateTime.utc(2010, 10, 16),
             lastDay: DateTime.utc(2030, 3, 14),
