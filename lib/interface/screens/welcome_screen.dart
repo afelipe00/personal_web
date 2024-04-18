@@ -74,6 +74,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               children: [
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 800),
+                  switchInCurve: Curves.easeOutCubic,
+                  switchOutCurve: Curves.easeOutCubic.flipped,
                   child: SizedBox(
                     key: ValueKey<int>(indexWord),
                     width: size.width * 0.3,
