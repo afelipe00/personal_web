@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/interface/widgets/about/experience_widget.dart';
+import 'package:portfolio/interface/widgets/about/simple/experience_widget.dart';
 import 'package:portfolio/interface/widgets/about/service_widget.dart';
 
 class SimpleAbout extends StatefulWidget {

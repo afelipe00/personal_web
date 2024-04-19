@@ -22,7 +22,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.simpleMode,
-      pageBuilder: (context, state) => const MaterialPage(child: HomeSimpleScreen(sections: [])),
+      pageBuilder: (context, state) => const MaterialPage(child: SimpleHomeScreen()),
     )
   ],
 );

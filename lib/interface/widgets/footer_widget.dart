@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:portfolio/config/constants/images.dart';
-import 'package:portfolio/interface/widgets/about/social_buttons_widget.dart';
+import 'package:portfolio/interface/widgets/social_buttons_widget.dart';
 
 class FooterWidget extends StatefulWidget {
   const FooterWidget({super.key});

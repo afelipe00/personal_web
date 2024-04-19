@@ -2,30 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/interface/screens/in_work.dart';
+import 'package:portfolio/interface/screens/in_work_screen.dart';
 
-import 'package:portfolio/interface/widgets/about/my_info_widget.dart';
-import 'package:portfolio/interface/widgets/about/section_buttons_widget.dart';
-import 'package:portfolio/interface/widgets/about/social_buttons_widget.dart';
+import 'package:portfolio/interface/widgets/home/simple/my_info_widget.dart';
+import 'package:portfolio/interface/widgets/home/simple/section_buttons_widget.dart';
+import 'package:portfolio/interface/widgets/social_buttons_widget.dart';
 import 'package:portfolio/interface/widgets/footer_widget.dart';
-import 'package:portfolio/interface/widgets/home/simple_about.dart';
-import 'package:portfolio/interface/widgets/home/simple_contact.dart';
-import 'package:portfolio/interface/widgets/home/simple_projects.dart';
-import 'package:portfolio/interface/widgets/home/simple_uses.dart';
+import 'package:portfolio/interface/screens/simple/simple_about_screen.dart';
+import 'package:portfolio/interface/screens/simple/simple_contact_screen.dart';
+import 'package:portfolio/interface/screens/simple/simple_projects_screen.dart';
+import 'package:portfolio/interface/screens/simple/simple_uses_screen.dart';
 
-class HomeSimpleScreen extends StatefulWidget {
-  final List<String> sections;
-
-  const HomeSimpleScreen({
+class SimpleHomeScreen extends StatefulWidget {
+  const SimpleHomeScreen({
     super.key,
-    required this.sections,
   });
 
   @override
-  State<HomeSimpleScreen> createState() => _HomeSimpleScreenState();
+  State<SimpleHomeScreen> createState() => _SimpleHomeScreenState();
 }
 
-class _HomeSimpleScreenState extends State<HomeSimpleScreen> with SingleTickerProviderStateMixin {
+class _SimpleHomeScreenState extends State<SimpleHomeScreen> with SingleTickerProviderStateMixin {
   int _selectedSection = 0;
   late AnimationController controller;
   late Animation<double> _fadeAnimation;
