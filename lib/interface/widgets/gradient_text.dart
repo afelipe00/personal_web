@@ -5,10 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class GradientText extends StatefulWidget {
   final String text;
+  final double sizeFont;
+  final String? fontFamily;
+  final List<Color>? colors;
 
   const GradientText({
     super.key,
     required this.text,
+    required this.sizeFont,
+    this.fontFamily,
+    this.colors,
   });
 
   @override
@@ -47,24 +53,25 @@ class _GradientTextState extends State<GradientText> with SingleTickerProviderSt
         tileMode: TileMode.mirror,
         begin: Alignment.centerLeft,
         end: Alignment.centerRight,
-        colors: const [
-          Colors.green,
-          Colors.blue,
-          Colors.purple,
-          Colors.pink,
-          Colors.red,
-          Colors.orange,
-          Colors.yellow,
-        ],
+        colors: widget.colors ??
+            const [
+              Colors.green,
+              Colors.blue,
+              Colors.purple,
+              Colors.pink,
+              Colors.red,
+              Colors.orange,
+              Colors.yellow,
+            ],
         transform: GradientRotation(animation.value * pi * 2),
       ).createShader(bounds),
       child: Text(
         widget.text,
         textAlign: TextAlign.right,
         style: TextStyle(
-          fontFamily: GoogleFonts.archivoBlack().fontFamily,
+          fontFamily: widget.fontFamily ?? GoogleFonts.archivoBlack().fontFamily,
           fontWeight: FontWeight.w500,
-          fontSize: 80,
+          fontSize: widget.sizeFont,
           color: Colors.white,
         ),
       ),

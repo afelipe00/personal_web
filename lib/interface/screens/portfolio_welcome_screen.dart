@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/config/constants/routes.dart';
 import 'package:portfolio/interface/widgets/gradient_text.dart';
+import 'package:portfolio/models/app_dimensions.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({
@@ -18,6 +19,9 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   int indexWord = 0;
+  Timer? _timer;
+  double fontSize = 80;
+  double scale = 1.0;
   List<String> words = [
     'creative',
     'python',
@@ -26,8 +30,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     'mobile',
     'AI',
   ];
-
-  Timer? _timer;
 
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 7), (timer) {
@@ -52,152 +54,116 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    if (size.width > AppDimensions.wideLayoutXl) {
+      fontSize = 80;
+      scale = 1.0;
+    } else if (size.width > AppDimensions.wideLayout2L) {
+      fontSize = 60;
+      scale = 1.0;
+    } else if (size.width > AppDimensions.wideLayout2M) {
+      fontSize = 40;
+      scale = 0.7;
+    } else {
+      fontSize = 26;
+      scale = 0.7;
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xFF111010),
       body: Padding(
         padding: EdgeInsets.all(size.width * 0.05),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              'Build with your next',
-              style: TextStyle(
-                fontFamily: GoogleFonts.archivoBlack().fontFamily,
-                fontWeight: FontWeight.w500,
-                fontSize: 80,
-                color: Colors.white,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 800),
-                  switchInCurve: Curves.easeOutCubic,
-                  switchOutCurve: Curves.easeOutCubic.flipped,
-                  child: SizedBox(
-                    key: ValueKey<int>(indexWord),
-                    width: size.width * 0.3,
-                    child: GradientText(
-                      text: words[indexWord],
+                SizedBox(
+                  width: size.width,
+                  child: RichText(
+                    textAlign: TextAlign.right,
+                    text: TextSpan(
+                      text: 'Build with your next\n',
+                      style: TextStyle(
+                        fontFamily: GoogleFonts.archivoBlack().fontFamily,
+                        fontWeight: FontWeight.w500,
+                        fontSize: fontSize,
+                        color: Colors.white,
+                      ),
+                      children: [
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 800),
+                            switchInCurve: Curves.easeOutCubic,
+                            switchOutCurve: Curves.easeOutCubic.flipped,
+                            child: SizedBox(
+                              key: ValueKey<int>(indexWord),
+                              width: fontSize <= 40 ? 200 : 370,
+                              child: GradientText(
+                                text: words[indexWord],
+                                sizeFont: fontSize,
+                              ),
+                            ),
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' developer',
+                          style: TextStyle(
+                            fontFamily: GoogleFonts.archivoBlack().fontFamily,
+                            fontWeight: FontWeight.w500,
+                            fontSize: fontSize,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                Text(
-                  ' developer',
-                  style: TextStyle(
-                    fontFamily: GoogleFonts.archivoBlack().fontFamily,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 80,
-                    color: Colors.white,
+                Transform.scale(
+                  scale: scale,
+                  alignment: Alignment.centerRight,
+                  child: SizedBox(
+                    width: 180,
+                    child: ElevatedButton(
+                      onPressed: () => context.push(AppRoutes.simpleMode),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF262626).withOpacity(0.7),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: const BorderSide(
+                            color: Color(0xFF525252),
+                            width: 0.5,
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Click to start',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.workSans().fontFamily,
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          const Icon(
+                            FeatherIcons.arrowRight,
+                            color: Colors.white,
+                            size: 16,
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Text(
-            //     'Select your mode',
-            //     style: TextStyle(
-            //       fontFamily: GoogleFonts.workSans().fontFamily,
-            //       fontWeight: FontWeight.normal,
-            //       fontSize: 16,
-            //       color: Colors.grey,
-            //     ),
-            //   ),
-            // ),
-            ElevatedButton(
-              onPressed: () => context.push(AppRoutes.simpleMode),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF262626).withOpacity(0.7),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  side: const BorderSide(
-                    color: Color(0xFF525252),
-                    width: 0.5,
-                  ),
-                ),
-              ),
-              child: SizedBox(
-                width: 150,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      'Click to start',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: GoogleFonts.workSans().fontFamily,
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const Icon(
-                      FeatherIcons.arrowRight,
-                      color: Colors.white,
-                      size: 16,
-                    )
-                  ],
-                ),
-              ),
-            ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.end,
-            //   children: [
-            //     ElevatedButton(
-            //       onPressed: () => context.push(AppRoutes.simpleMode),
-            //       style: ElevatedButton.styleFrom(
-            //         backgroundColor: const Color(0xFF262626).withOpacity(0.7),
-            //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(8),
-            //           side: const BorderSide(
-            //             color: Color(0xFF525252),
-            //             width: 0.5,
-            //           ),
-            //         ),
-            //       ),
-            //       child: SizedBox(
-            //         width: 90,
-            //         child: Text(
-            //           'Simplified',
-            //           textAlign: TextAlign.center,
-            //           style: TextStyle(
-            //             fontFamily: GoogleFonts.workSans().fontFamily,
-            //             fontSize: 16,
-            //             color: Colors.white,
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //     const SizedBox(width: 20.0),
-            //     OutlinedButton(
-            //       onPressed: () => context.push(AppRoutes.experienceMode),
-            //       style: OutlinedButton.styleFrom(
-            //         backgroundColor: Colors.green.withOpacity(0.1),
-            //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(8),
-            //         ),
-            //         side: BorderSide(
-            //           color: Colors.green.withOpacity(0.5),
-            //         ),
-            //       ),
-            //       child: SizedBox(
-            //         width: 90,
-            //         child: Text(
-            //           'Pretty',
-            //           textAlign: TextAlign.center,
-            //           style: TextStyle(
-            //             fontFamily: GoogleFonts.workSans().fontFamily,
-            //             fontSize: 16,
-            //             color: Colors.green,
-            //           ),
-            //         ),
-            //       ),
-            //     )
-            //   ],
-            // )
-          ],
+          ),
         ),
       ),
     );

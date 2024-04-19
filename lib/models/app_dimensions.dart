@@ -16,6 +16,7 @@ class AppDimensions {
   static const double wideLayout3Xl = 3840;
   static const double wideLayout2Xl = 19200;
   static const double wideLayoutXl = 1200;
+  static const double wideLayout2L = 912;
   static const double wideLayoutL = 768;
   static const double wideLayout2M = 600;
   static const double wideLayoutM = 480;
