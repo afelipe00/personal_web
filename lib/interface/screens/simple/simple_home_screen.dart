@@ -79,35 +79,6 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> with SingleTickerPr
         scrolledUnderElevation: 0.0,
         elevation: 0.0,
         leading: const SizedBox.shrink(),
-        actions: const [
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          //   child: Transform.scale(
-          //     scale: 0.8,
-          //     child: OutlinedButton(
-          //       onPressed: () {},
-          //       style: OutlinedButton.styleFrom(
-          //         backgroundColor: Colors.green.withOpacity(0.1),
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(8),
-          //         ),
-          //         side: BorderSide(
-          //           color: Colors.green.withOpacity(0.5),
-          //         ),
-          //       ),
-          //       child: Text(
-          //         'Beauty',
-          //         textAlign: TextAlign.center,
-          //         style: TextStyle(
-          //           fontFamily: GoogleFonts.workSans().fontFamily,
-          //           fontSize: 16,
-          //           color: Colors.green,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // )
-        ],
       ),
       body: FooterView(
         flex: 7,
@@ -121,6 +92,7 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> with SingleTickerPr
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
             child: SingleChildScrollView(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 30.0),

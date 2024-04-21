@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/models/app_dimensions.dart';
 
 class SectionsButtons extends StatefulWidget {
   final void Function(int index) onSectionSelected;
@@ -11,6 +12,7 @@ class SectionsButtons extends StatefulWidget {
 
 class _SectionsButtonsState extends State<SectionsButtons> {
   int _selectedSection = 0;
+  double _fontSize = 16.0;
 
   void _onSectionSelected(int index) {
     setState(() {
@@ -21,7 +23,18 @@ class _SectionsButtonsState extends State<SectionsButtons> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    final size = MediaQuery.of(context).size;
+
+    if (size.width > AppDimensions.wideLayout2L) {
+      _fontSize = 16.0;
+    } else if (size.width > AppDimensions.wideLayoutM) {
+      _fontSize = 14.0;
+    } else {
+      _fontSize = 13.0;
+    }
+
+    return Wrap(
+      alignment: WrapAlignment.start,
       children: [
         TextButton(
           onPressed: () => _onSectionSelected(0),
@@ -29,7 +42,7 @@ class _SectionsButtonsState extends State<SectionsButtons> {
               ? TextButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(_fontSize / 2),
                   ),
                 )
               : null,
@@ -37,8 +50,9 @@ class _SectionsButtonsState extends State<SectionsButtons> {
             "About",
             style: TextStyle(
               color: _selectedSection == 0 ? Colors.black : Colors.white,
-              fontSize: 16.0,
+              fontSize: _fontSize,
               fontFamily: GoogleFonts.workSans().fontFamily,
+              fontWeight: FontWeight.normal,
             ),
           ),
         ),
@@ -48,7 +62,7 @@ class _SectionsButtonsState extends State<SectionsButtons> {
               ? TextButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(_fontSize / 2),
                   ),
                 )
               : null,
@@ -56,8 +70,9 @@ class _SectionsButtonsState extends State<SectionsButtons> {
             "Projects",
             style: TextStyle(
               color: _selectedSection == 1 ? Colors.black : Colors.white,
-              fontSize: 16.0,
+              fontSize: _fontSize,
               fontFamily: GoogleFonts.workSans().fontFamily,
+              fontWeight: FontWeight.normal,
             ),
           ),
         ),
@@ -67,7 +82,7 @@ class _SectionsButtonsState extends State<SectionsButtons> {
               ? TextButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(_fontSize / 2),
                   ),
                 )
               : null,
@@ -75,8 +90,9 @@ class _SectionsButtonsState extends State<SectionsButtons> {
             "Uses",
             style: TextStyle(
               color: _selectedSection == 2 ? Colors.black : Colors.white,
-              fontSize: 16.0,
+              fontSize: _fontSize,
               fontFamily: GoogleFonts.workSans().fontFamily,
+              fontWeight: FontWeight.normal,
             ),
           ),
         ),
@@ -86,7 +102,7 @@ class _SectionsButtonsState extends State<SectionsButtons> {
               ? TextButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(_fontSize / 2),
                   ),
                 )
               : null,
@@ -94,8 +110,9 @@ class _SectionsButtonsState extends State<SectionsButtons> {
             "Blogs",
             style: TextStyle(
               color: _selectedSection == 3 ? Colors.black : Colors.white,
-              fontSize: 16.0,
+              fontSize: _fontSize,
               fontFamily: GoogleFonts.workSans().fontFamily,
+              fontWeight: FontWeight.normal,
             ),
           ),
         ),
@@ -105,7 +122,7 @@ class _SectionsButtonsState extends State<SectionsButtons> {
               ? TextButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(_fontSize / 2),
                   ),
                 )
               : null,
@@ -113,8 +130,9 @@ class _SectionsButtonsState extends State<SectionsButtons> {
             "Contact",
             style: TextStyle(
               color: _selectedSection == 4 ? Colors.black : Colors.white,
-              fontSize: 16.0,
+              fontSize: _fontSize,
               fontFamily: GoogleFonts.workSans().fontFamily,
+              fontWeight: FontWeight.normal,
             ),
           ),
         ),

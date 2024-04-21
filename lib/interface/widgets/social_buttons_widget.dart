@@ -130,6 +130,15 @@ class _SocialButtonState extends State<SocialButton> {
                 isHover = value;
               });
             },
+            onLongPress: () async {
+              setState(() {
+                isHover = true;
+              });
+              await Future.delayed(const Duration(milliseconds: 500));
+              setState(() {
+                isHover = false;
+              });
+            },
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: widget.onTap,
