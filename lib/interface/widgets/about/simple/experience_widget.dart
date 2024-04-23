@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/models/app_dimensions.dart';
 import 'package:portfolio/models/experience.dart';
 import 'package:timelines/timelines.dart';
 
@@ -72,8 +73,10 @@ class ExperienceTimeLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (size.width > AppDimensions.wideLayout2Xl) {}
     return Timeline.tileBuilder(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       theme: TimelineThemeData(
         nodePosition: 0.04,
         indicatorTheme: const IndicatorThemeData(
