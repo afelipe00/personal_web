@@ -7,7 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/config/constants/images.dart';
 
 class SocialButtons extends StatefulWidget {
-  const SocialButtons({super.key});
+  final MainAxisAlignment? mainAxisAlignment;
+
+  const SocialButtons({super.key, this.mainAxisAlignment});
 
   @override
   State<SocialButtons> createState() => _SocialButtonsState();
@@ -17,7 +19,7 @@ class _SocialButtonsState extends State<SocialButtons> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: widget.mainAxisAlignment ?? MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SocialButton(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/config/constants/images.dart';
+import 'package:portfolio/models/app_dimensions.dart';
 import 'package:portfolio/models/service.dart';
 
 final services = [
@@ -49,6 +50,8 @@ class _ServiceWidgetState extends State<ServiceWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -89,11 +92,21 @@ class _ServiceWidgetState extends State<ServiceWidget> {
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: size.width > AppDimensions.wideLayoutXl
+                ? 3
+                : size.width > AppDimensions.wideLayoutL
+                    ? 2
+                    : 1,
             crossAxisSpacing: 20.0,
             mainAxisSpacing: 10.0,
-            childAspectRatio: 1.8,
+            childAspectRatio: size.width > AppDimensions.wideLayoutXl
+                ? 1.8
+                : size.width > AppDimensions.wideLayoutL
+                    ? 1.5
+                    : size.width > AppDimensions.wideLayoutM
+                        ? 2.1
+                        : 1.5,
           ),
           itemCount: services.length,
           itemBuilder: (context, index) {
