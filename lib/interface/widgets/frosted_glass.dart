@@ -22,7 +22,7 @@ class FrostedGlassWidget extends StatelessWidget {
             BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
               child: Container(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withOpacity(0.4),
               ),
             ),
             Container(

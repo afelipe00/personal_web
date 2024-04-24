@@ -4,12 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/config/constants/images.dart';
 import 'package:portfolio/interface/widgets/frosted_glass.dart';
 import 'package:portfolio/interface/widgets/parallax_card.dart';
+import 'package:portfolio/models/app_dimensions.dart';
 import 'package:portfolio/models/projects.dart';
 
 final projects = [
   Project(
     name: 'Konyu App Mobile',
-    description: '',
+    description:
+        "Developed Flutter mobile app with market status, purchasing, promotion features. Utilized modern state managers, Firebase services (realtime database, FCM, Crashlytics), APIs, animations, clean architecture.",
     images: [
       projectApp0,
       projectApp1,
@@ -18,7 +20,8 @@ final projects = [
   ),
   Project(
     name: 'Konyu Portal Web',
-    description: '',
+    description:
+        "Led development of ReactJS web portal with Tailwind for administrative users. Provided updated market information.",
     images: [
       projectPortal0,
       projectPortal1,
@@ -27,7 +30,8 @@ final projects = [
   ),
   Project(
     name: 'Konyu Smart Market',
-    description: '',
+    description:
+        "I was part of the development team in charge of creating the recognition algorithm for the products taken on the market",
     images: [
       projectSm0,
       projectSm1,
@@ -36,7 +40,8 @@ final projects = [
   ),
   Project(
     name: 'AgTech - Agriculture Tech',
-    description: '',
+    description:
+        "Created algorithm for university project detecting agricultural crop diseases using cameras and sensors.",
     images: [
       projectAgTech0,
       projectAgTech1,
@@ -59,8 +64,8 @@ class _SimpleProjectsState extends State<SimpleProjects> {
       padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0, bottom: 20.0),
       child: GridView.builder(
         shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: size.width > AppDimensions.wideLayoutL ? 2 : 1,
           crossAxisSpacing: 16.0,
           mainAxisSpacing: 16.0,
           childAspectRatio: 1.5,
@@ -136,9 +141,10 @@ class _SimpleProjectsState extends State<SimpleProjects> {
                         subtitle: Text(
                           projects[index].description,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.white.withOpacity(0.8),
                             fontFamily: GoogleFonts.openSans().fontFamily,
-                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
                           ),
                         ),
                       ),
