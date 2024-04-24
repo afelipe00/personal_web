@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/config/constants/images.dart';
+import 'package:portfolio/models/app_dimensions.dart';
 import 'package:portfolio/models/languages.dart';
 
 final languages = [
@@ -71,14 +72,19 @@ class _SimpleUsesState extends State<SimpleUses> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       children: [
         const SizedBox(
           height: 40.0,
         ),
         GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: size.width > AppDimensions.wideLayoutL
+                ? 3
+                : size.width > AppDimensions.wideLayoutM
+                    ? 2
+                    : 1,
             crossAxisSpacing: 10.0,
             mainAxisSpacing: 10.0,
             childAspectRatio: 3.0,
@@ -129,69 +135,84 @@ class _SimpleUsesState extends State<SimpleUses> {
                 ),
               );
             } else {
-              return MouseRegion(
-                onEnter: (event) {
+              return GestureDetector(
+                onTap: () async {
                   setState(() {
                     colorWord = languages[index - 1].color;
                     currentWord = languages[index - 1].name;
                     currentIndex = index - 1;
                   });
-                },
-                onExit: (event) {
+                  await Future.delayed(const Duration(milliseconds: 500));
                   setState(() {
                     colorWord = Colors.green;
                     currentWord = 'project';
                     currentIndex = -1;
                   });
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.2),
-                      width: 0.5,
-                    ),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Colors.white.withOpacity(0.1),
-                        Colors.white.withOpacity(0.05),
-                      ],
-                    ),
-                    boxShadow: currentIndex == index - 1
-                        ? [
-                            BoxShadow(
-                              color: languages[index - 1].color.withOpacity(0.1),
-                              blurRadius: 10.0,
-                              spreadRadius: 1.0,
-                            ),
-                          ]
-                        : [],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: SvgPicture.asset(
-                          languages[index - 1].image,
-                          height: 40.0,
-                          width: 40.0,
-                        ),
+                child: MouseRegion(
+                  onEnter: (event) {
+                    setState(() {
+                      colorWord = languages[index - 1].color;
+                      currentWord = languages[index - 1].name;
+                      currentIndex = index - 1;
+                    });
+                  },
+                  onExit: (event) {
+                    setState(() {
+                      colorWord = Colors.green;
+                      currentWord = 'project';
+                      currentIndex = -1;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.0),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.2),
+                        width: 0.5,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          languages[index - 1].name,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.0,
-                            fontFamily: GoogleFonts.workSans().fontFamily,
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.white.withOpacity(0.1),
+                          Colors.white.withOpacity(0.05),
+                        ],
+                      ),
+                      boxShadow: currentIndex == index - 1
+                          ? [
+                              BoxShadow(
+                                color: languages[index - 1].color.withOpacity(0.1),
+                                blurRadius: 10.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ]
+                          : [],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: SvgPicture.asset(
+                            languages[index - 1].image,
+                            height: 40.0,
+                            width: 40.0,
                           ),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            languages[index - 1].name,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontFamily: GoogleFonts.workSans().fontFamily,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
