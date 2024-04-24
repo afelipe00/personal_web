@@ -73,12 +73,26 @@ class ExperienceTimeLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (size.width > AppDimensions.wideLayout2Xl) {}
+    double contentWidth = size.width * 0.4;
+    double nodePosition = 0.04;
+    if (size.width > AppDimensions.wideLayoutXl) {
+      contentWidth = size.width * 0.4;
+      nodePosition = 0.04;
+    } else if (size.width > AppDimensions.wideLayout2L) {
+      contentWidth = size.width * 0.5;
+      nodePosition = 0.03;
+    } else if (size.width > AppDimensions.wideLayoutL) {
+      contentWidth = size.width * 0.7;
+      nodePosition = 0.03;
+    } else {
+      contentWidth = size.width * 0.9;
+      nodePosition = 0.0;
+    }
     return Timeline.tileBuilder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       theme: TimelineThemeData(
-        nodePosition: 0.04,
+        nodePosition: nodePosition,
         indicatorTheme: const IndicatorThemeData(
           size: 14.0,
         ),
@@ -115,7 +129,7 @@ class ExperienceTimeLine extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(12.0),
             child: Container(
-              width: size.width * 0.4,
+              width: contentWidth,
               padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
@@ -128,70 +142,152 @@ class ExperienceTimeLine extends StatelessWidget {
                   ],
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: size.width * 0.4 * 0.75,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          experiences[index].title,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.0,
-                            fontFamily: GoogleFonts.workSans().fontFamily,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 4.0,
-                        ),
-                        Text(
-                          experiences[index].body,
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontFamily: GoogleFonts.openSans().fontFamily,
-                            fontSize: 12.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  experiences[index].isCurrent
-                      ? Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: Colors.green.withOpacity(0.5),
-                            ),
-                          ),
-                          child: Text(
-                            'present',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: GoogleFonts.workSans().fontFamily,
-                              fontSize: 14,
-                              color: Colors.green,
-                            ),
-                          ),
-                        )
-                      : Text(
-                          '${experiences[index].checkIn.year} - ${experiences[index].checkOut?.year}',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.0,
-                            fontFamily: GoogleFonts.openSans().fontFamily,
-                          ),
-                        ),
-                ],
-              ),
+              child: ContentTimeLineWidget(contentWidth: contentWidth, index: index),
             ),
           );
         },
       ),
     );
+  }
+}
+
+class ContentTimeLineWidget extends StatelessWidget {
+  const ContentTimeLineWidget({
+    super.key,
+    required this.contentWidth,
+    required this.index,
+  });
+
+  final double contentWidth;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    final rowContent = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        SizedBox(
+          width: contentWidth * 0.6,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                experiences[index].title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                  fontFamily: GoogleFonts.workSans().fontFamily,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 4.0,
+              ),
+              Text(
+                experiences[index].body,
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontFamily: GoogleFonts.openSans().fontFamily,
+                  fontSize: 12.0,
+                ),
+              ),
+            ],
+          ),
+        ),
+        experiences[index].isCurrent
+            ? Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.green.withOpacity(0.5),
+                  ),
+                ),
+                child: Text(
+                  'present',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.workSans().fontFamily,
+                    fontSize: 14,
+                    color: Colors.green,
+                  ),
+                ),
+              )
+            : Text(
+                '${experiences[index].checkIn.year} - ${experiences[index].checkOut?.year}',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14.0,
+                  fontFamily: GoogleFonts.openSans().fontFamily,
+                ),
+              ),
+      ],
+    );
+
+    final columnContent = Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          experiences[index].title,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+            fontFamily: GoogleFonts.workSans().fontFamily,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        if (experiences[index].isCurrent)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Transform.scale(
+              scale: 0.9,
+              alignment: Alignment.centerLeft,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.green.withOpacity(0.5),
+                  ),
+                ),
+                child: Text(
+                  'present',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.workSans().fontFamily,
+                    fontSize: 14,
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+            ),
+          )
+        else
+          Text(
+            '${experiences[index].checkIn.year} - ${experiences[index].checkOut?.year}',
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.8),
+              fontSize: 14.0,
+              fontFamily: GoogleFonts.openSans().fontFamily,
+            ),
+          ),
+        const SizedBox(
+          height: 12.0,
+        ),
+        Text(
+          experiences[index].body,
+          style: TextStyle(
+            color: Colors.grey,
+            fontFamily: GoogleFonts.openSans().fontFamily,
+            fontSize: 12.0,
+          ),
+        ),
+      ],
+    );
+
+    return size.width > AppDimensions.wideLayout2M ? rowContent : columnContent;
   }
 }
