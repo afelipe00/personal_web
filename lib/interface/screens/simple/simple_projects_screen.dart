@@ -10,8 +10,7 @@ import 'package:portfolio/models/projects.dart';
 final projects = [
   Project(
     name: 'Konyu App Mobile',
-    description:
-        "Developed Flutter mobile app with market status, purchasing, promotion features. Utilized modern state managers, Firebase services (realtime database, FCM, Crashlytics), APIs, animations, clean architecture.",
+    description: "Developed Flutter mobile app with market status, purchasing, promotion features.",
     images: [
       projectApp0,
       projectApp1,
@@ -144,7 +143,7 @@ class _SimpleProjectsState extends State<SimpleProjects> {
                             color: Colors.white.withOpacity(0.8),
                             fontFamily: GoogleFonts.openSans().fontFamily,
                             fontWeight: FontWeight.bold,
-                            fontSize: 14.0,
+                            fontSize: 12.0,
                           ),
                         ),
                       ),
