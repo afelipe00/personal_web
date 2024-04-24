@@ -79,6 +79,7 @@ class _SimpleUsesState extends State<SimpleUses> {
           height: 40.0,
         ),
         GridView.builder(
+          physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: size.width > AppDimensions.wideLayoutL
                 ? 3
