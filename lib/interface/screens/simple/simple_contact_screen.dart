@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:portfolio/config/constants/images.dart';
+import 'package:portfolio/models/app_dimensions.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -35,6 +36,8 @@ class _SimpleContactState extends State<SimpleContact> {
   late List<String> dropdownItems;
   late List<Widget> selectedItems;
   int hoverButtonIndex = -1;
+  double widthDropDown = 0.0;
+  double widthCalendar = 0.0;
 
   @override
   void initState() {
@@ -81,6 +84,23 @@ class _SimpleContactState extends State<SimpleContact> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    if (size.width > AppDimensions.wideLayoutXl) {
+      widthDropDown = size.width * 0.23;
+      widthCalendar = size.width * 0.35;
+    } else if (size.width > AppDimensions.wideLayout2L) {
+      widthDropDown = size.width * 0.3;
+      widthCalendar = size.width * 0.5;
+    } else if (size.width > AppDimensions.wideLayoutL) {
+      widthDropDown = size.width * 0.4;
+      widthCalendar = size.width * 0.6;
+    } else if (size.width > AppDimensions.wideLayoutM) {
+      widthDropDown = size.width * 0.6;
+      widthCalendar = size.width * 0.8;
+    } else {
+      widthDropDown = size.width * 0.8;
+      widthCalendar = size.width;
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,17 +181,14 @@ class _SimpleContactState extends State<SimpleContact> {
             ],
           ),
         ),
-        SizedBox(
-          width: size.width * 0.23,
-          child: LocationDropDown(
-            dropdownItems: dropdownItems,
-            size: size,
-            selectedTimezone: selectedTimezone,
-          ),
+        LocationDropDown(
+          width: widthDropDown,
+          dropdownItems: dropdownItems,
+          selectedTimezone: selectedTimezone,
         ),
         Container(
           padding: const EdgeInsets.all(8.0),
-          width: size.width * 0.35,
+          width: widthCalendar,
           child: TableCalendar(
             firstDay: DateTime.utc(2010, 10, 16),
             lastDay: DateTime.utc(2030, 3, 14),
@@ -448,120 +465,123 @@ class LocationDropDown extends StatelessWidget {
   const LocationDropDown({
     super.key,
     required this.dropdownItems,
-    required this.size,
     required this.selectedTimezone,
+    required this.width,
   });
 
   final List<String> dropdownItems;
-  final Size size;
   final String selectedTimezone;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
-    return DropdownSearch<String>(
-      popupProps: PopupProps.menu(
-        showSelectedItems: true,
-        showSearchBox: true,
-        itemBuilder: (context, item, isSelected) {
-          return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-            child: Text(
-              item,
-              style: TextStyle(
-                color: isSelected ? Colors.green : Colors.white,
+    return SizedBox(
+      width: width,
+      child: DropdownSearch<String>(
+        popupProps: PopupProps.menu(
+          showSelectedItems: true,
+          showSearchBox: true,
+          itemBuilder: (context, item, isSelected) {
+            return Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+              child: Text(
+                item,
+                style: TextStyle(
+                  color: isSelected ? Colors.green : Colors.white,
+                ),
               ),
+            );
+          },
+          listViewProps: const ListViewProps(
+            padding: EdgeInsets.all(5.0),
+            physics: BouncingScrollPhysics(),
+            shrinkWrap: true,
+          ),
+          menuProps: MenuProps(
+            borderRadius: BorderRadius.circular(12.0),
+            backgroundColor: const Color(0xFF222222),
+            elevation: 20,
+            barrierColor: Colors.black.withOpacity(0.2),
+          ),
+          searchFieldProps: TextFieldProps(
+            cursorColor: Colors.white,
+            textInputAction: TextInputAction.search,
+            decoration: InputDecoration(
+              hintText: 'Search your location',
+              hintStyle: const TextStyle(
+                color: Colors.grey,
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey.withOpacity(0.2),
+                ),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.green.withOpacity(0.7),
+                ),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+            ),
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          scrollbarProps: ScrollbarProps(
+            thickness: 8.0,
+            radius: const Radius.circular(3.0),
+            thumbColor: Colors.green.withOpacity(0.8),
+          ),
+        ),
+        items: dropdownItems,
+        dropdownBuilder: (context, selectedItem) {
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 2.0),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(5.0),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.2),
+              ),
+            ),
+            child: Row(
+              children: [
+                const Icon(
+                  FeatherIcons.globe,
+                  color: Colors.white,
+                  size: 14.0,
+                ),
+                const SizedBox(width: 5.0),
+                SizedBox(
+                  width: width * 0.5,
+                  child: Text(
+                    selectedItem ?? "Error",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
             ),
           );
         },
-        listViewProps: const ListViewProps(
-          padding: EdgeInsets.all(5.0),
-          physics: BouncingScrollPhysics(),
-          shrinkWrap: true,
-        ),
-        menuProps: MenuProps(
-          borderRadius: BorderRadius.circular(12.0),
-          backgroundColor: const Color(0xFF222222),
-          elevation: 20,
-          barrierColor: Colors.black.withOpacity(0.2),
-        ),
-        searchFieldProps: TextFieldProps(
-          cursorColor: Colors.white,
-          textInputAction: TextInputAction.search,
-          decoration: InputDecoration(
-            hintText: 'Search your location',
-            hintStyle: const TextStyle(
-              color: Colors.grey,
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.grey.withOpacity(0.2),
-              ),
-              borderRadius: BorderRadius.circular(12.0),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.green.withOpacity(0.7),
-              ),
-              borderRadius: BorderRadius.circular(12.0),
-            ),
+        dropdownDecoratorProps: const DropDownDecoratorProps(
+          baseStyle: TextStyle(color: Colors.white),
+          dropdownSearchDecoration: InputDecoration(
+            border: InputBorder.none,
           ),
-          style: const TextStyle(
+        ),
+        dropdownButtonProps: const DropdownButtonProps(
+          icon: Icon(
+            Icons.keyboard_arrow_down_rounded,
             color: Colors.white,
           ),
         ),
-        scrollbarProps: ScrollbarProps(
-          thickness: 8.0,
-          radius: const Radius.circular(3.0),
-          thumbColor: Colors.green.withOpacity(0.8),
-        ),
+        onChanged: print,
+        selectedItem: selectedTimezone,
       ),
-      items: dropdownItems,
-      dropdownBuilder: (context, selectedItem) {
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 2.0),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.05),
-            borderRadius: BorderRadius.circular(5.0),
-            border: Border.all(
-              color: Colors.white.withOpacity(0.2),
-            ),
-          ),
-          child: Row(
-            children: [
-              const Icon(
-                FeatherIcons.globe,
-                color: Colors.white,
-                size: 14.0,
-              ),
-              const SizedBox(width: 5.0),
-              SizedBox(
-                width: size.width * 0.15,
-                child: Text(
-                  selectedItem ?? "Error",
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-      dropdownDecoratorProps: const DropDownDecoratorProps(
-        baseStyle: TextStyle(color: Colors.white),
-        dropdownSearchDecoration: InputDecoration(
-          border: InputBorder.none,
-        ),
-      ),
-      dropdownButtonProps: const DropdownButtonProps(
-        icon: Icon(
-          Icons.keyboard_arrow_down_rounded,
-          color: Colors.white,
-        ),
-      ),
-      onChanged: print,
-      selectedItem: selectedTimezone,
     );
   }
 }
