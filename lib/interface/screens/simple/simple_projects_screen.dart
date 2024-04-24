@@ -63,6 +63,7 @@ class _SimpleProjectsState extends State<SimpleProjects> {
       padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0, bottom: 20.0),
       child: GridView.builder(
         shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: size.width > AppDimensions.wideLayoutL ? 2 : 1,
           crossAxisSpacing: 16.0,
